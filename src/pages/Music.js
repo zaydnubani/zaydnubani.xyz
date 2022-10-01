@@ -141,7 +141,7 @@ const Music = () => {
             });
             return
         }
-    },[authtoken, follow])
+    },[authtoken, follow, following])
 
     return(
         <div className="container p-2">
