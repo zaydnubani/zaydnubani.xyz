@@ -1,0 +1,57 @@
+.futura {
+    font-family: futura-pt, sans-serif;
+    font-weight: 700;
+    font-style: italic;
+}
+
+.arabesque {
+    font-family: hwt-arabesque, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.water {
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-image: url('/img/water.webp');
+    color: transparent;
+
+}
+
+.water-underline {
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-image: url('/img/water.webp');
+  color: transparent;
+  text-decoration-line: underline;
+
+}
+
+.waterBG {
+  background-image: url('/img/water.webp');
+}
+
+
+
+
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: white;
+    opacity: 1; /* Firefox */
+  }
+  
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: white;
+  }
+  
+  ::-ms-input-placeholder { /* Microsoft Edge */
+    color: white;
+  }
+
+  input:focus {
+    outline: none !important;
+    border:1px solid white;
+    box-shadow: 0 0 10px white;
+  }
