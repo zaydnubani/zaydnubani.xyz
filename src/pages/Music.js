@@ -160,7 +160,7 @@ const Music = () => {
                         <div className="col-12 p-5 d-flex flex-column justify-content-evenly text-center" >
                             <span className="futura fs-1" style={{color:'white'}}>Want to hear what I'm listening to?</span>
                             <a className='btn p-3 my-3 align-self-center' href={url} style={{backgroundColor: 'white'}}>
-                                <span className="fs-3 futura text-uppercase water text-wrap">Connect your Spotify!</span>
+                                <span className="fs-3 futura text-uppercase" style={{color: '#006994'}}>Connect your Spotify!</span>
                             </a>
                         </div>
                 }
