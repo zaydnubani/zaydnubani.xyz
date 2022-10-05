@@ -38,11 +38,8 @@
   color: transparent;
 }
 
-.water-underline {
-  -webkit-background-clip: text;
-  background-clip: text;
-  background-image: url('/img/water.webp');
-  color: transparent;
+.water-underline:hover {
+  color: #006994;
   text-decoration-line: underline;
 }
 

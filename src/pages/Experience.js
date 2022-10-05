@@ -9,7 +9,7 @@ const Work = () => {
             Title: 'Full-Stack Developer',
             Employment: 'Freelance',
             Time: {
-                start: 'June, 2022',
+                start: '06/22',
                 end: 'Present'
             },
             Details: [
@@ -52,8 +52,8 @@ const Work = () => {
             Title: 'Area Manager II',
             Employment: 'Full-Time',
             Time: {
-                start: 'June, 2020',
-                end: 'June, 2022'
+                start: '06/20',
+                end: '06/22'
             },
             Details: [
                 {
@@ -99,8 +99,8 @@ const Work = () => {
             Title: 'Manager in Training',
             Employment: 'Internship',
             Time: {
-                start: 'June, 20219',
-                end: 'August, 2019'
+                start: '06/19',
+                end: '08/19'
             },
             Details: [
                 {
@@ -138,8 +138,8 @@ const Work = () => {
             Title: 'Sales & Marketing Associate',
             Employment: 'Internship',
             Time: {
-                start: 'June, 2016',
-                end: 'August, 2016'
+                start: '06/16',
+                end: '08/16'
             },
             Details: [
                 {
@@ -177,8 +177,8 @@ const Work = () => {
             Title: 'Instructor',
             Employment: 'Volunteer',
             Time: {
-                start: 'May, 2017',
-                end: 'July, 2017'
+                start: '05/17',
+                end: '07/17'
             },
             Details: [
                 {
@@ -241,13 +241,13 @@ const Work = () => {
                                             return(
                                                 <div className="accordion-item" key={res.Details.indexOf(ret)}>
                                                     <h2 className="accordion-header" id="flush-headingOne">
-                                                        <button className="accordion-button collapsed futura water" type="button" data-bs-toggle="collapse" data-bs-target={`#${collapse}`} aria-expanded="false" aria-controls="flush-collapseOne">
+                                                        <button className="accordion-button collapsed futura" type="button" data-bs-toggle="collapse" style={{color: '#006994'}} data-bs-target={`#${collapse}`} aria-expanded="false" aria-controls="flush-collapseOne">
                                                             {ret.Type}
                                                         </button>
                                                     </h2>
                                                     <div id={`${collapse}`} className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                                         <div className="accordion-body">
-                                                            <span className="water futura">{ret.Info}</span>
+                                                            <span className="futura" style={{color: '#006994'}}>{ret.Info}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -260,9 +260,9 @@ const Work = () => {
                                         res.Links.map((data)=>{
                                             return(
                                                 data.name === 'main' ?
-                                                    <button className='btn futura water-underline fs-5 border-0' src='https://amazon.com' key={res.Links.indexOf(data)} onClick={()=>{
+                                                    <button className='btn futura fs-5 border-0 water-underline' src='https://amazon.com' key={res.Links.indexOf(data)} onClick={()=>{
                                                         window.location.href = data.url
-                                                    }}>
+                                                    }} style={{color: '#006994'}}>
                                                         Learn more
                                                     </button>
                                                     :
