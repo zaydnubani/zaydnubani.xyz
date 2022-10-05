@@ -27,7 +27,7 @@ const scopes = [
 
 const CLIENT_ID = '677da9ba411c4561a74e4da23f97f0b9',
 CLIENT_SECRET = 'b89f6fdf5e6c4ac390d7139cf6882cac',
-REDIRECT_URI = 'https://zaydjnubani.com/music' 
+REDIRECT_URI = 'http://localhost:3000/music' 
 
 const url = `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&response_type=code&redirect_uri=${REDIRECT_URI}&scope=${scopes.join('%20')}&response_type=token&show_dialog=true`
 
@@ -51,8 +51,8 @@ const Music = () => {
 
     // sets token
     useEffect(()=>{
-        if(hash.substring(1) !== ''){
-            setAuthtoken(hash.substring(1).split("=")[1].split('&')[0])
+        if(hash.split('#').length >= 2){
+            setAuthtoken(hash.split('=')[1].split('&')[0])
             return
         }
         return
@@ -66,7 +66,7 @@ const Music = () => {
                 return setUser(data.body)
             }).catch(err=>{
                 toast.error(`Unable to set authorization token, please try again.`)
-                return console.log(err)
+                return console.log(window.location)
             })
             return
         }
@@ -160,7 +160,7 @@ const Music = () => {
                         <div className="col-12 p-5 d-flex flex-column justify-content-evenly text-center" >
                             <span className="futura fs-1" style={{color:'white'}}>Want to hear what I'm listening to?</span>
                             <a className='btn p-3 my-3 align-self-center' href={url} style={{backgroundColor: 'white'}}>
-                                <span className="fs-3 futura text-uppercase water">Connect your Spotify!</span>
+                                <span className="fs-3 futura text-uppercase water text-wrap">Connect your Spotify!</span>
                             </a>
                         </div>
                 }
