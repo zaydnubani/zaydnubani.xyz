@@ -5,7 +5,7 @@ const Work = () => {
     const Experience = [
         {
             Company: 'SACRΞD GARDΞN',
-            Location: 'San Francisco, Ca.',
+            Location: 'SFO',
             Title: 'Full-Stack Developer',
             Employment: 'Freelance',
             Time: {
@@ -48,7 +48,7 @@ const Work = () => {
         },
         {
             Company: 'AMAZON',
-            Location: 'Philadelphia, Pa.',
+            Location: 'PHL',
             Title: 'Area Manager II',
             Employment: 'Full-Time',
             Time: {
@@ -95,7 +95,7 @@ const Work = () => {
         },
         {
             Company: 'POOLCORP',
-            Location: 'Blackwood, Nj.',
+            Location: 'EWR',
             Title: 'Manager in Training',
             Employment: 'Internship',
             Time: {
@@ -134,8 +134,8 @@ const Work = () => {
         },
         {
             Company: 'J&J',
-            Location: 'Dubai, U.A.E.',
-            Title: 'Sales & Marketing Associate',
+            Location: 'DXB',
+            Title: 'Marketing Intern',
             Employment: 'Internship',
             Time: {
                 start: '06/16',
@@ -173,7 +173,7 @@ const Work = () => {
         },
         {
             Company: 'MAKE LIFE SKATE LIFE',
-            Location: 'Amman, J.O.D.',
+            Location: 'JOD',
             Title: 'Instructor',
             Employment: 'Volunteer',
             Time: {
@@ -217,11 +217,12 @@ const Work = () => {
                             <button className="d-flex flex-column w-100 rounded" style={{backgroundColor: 'white', border: 'none'}} type="button" data-bs-toggle="collapse" data-bs-target={`#Collapse-${Experience.indexOf(res)}`} aria-expanded="false" aria-controls={`Collapse`}>
                                 <div className='d-flex flex-column align-items-start w-100'>
                                     <span className="futura water fs-3">
-                                        {res.Company}
-                                    </span>
-                                    <span className="futura water fs-5">
                                     {res.Title}
                                     </span>
+                                    <span className="futura water fs-5">
+                                        {res.Company}
+                                    </span>
+                                    
                                 </div>
                                 <div className='d-flex flex-row w-100'>
                                     <span className="futura water">
