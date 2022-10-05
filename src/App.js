@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Landing from './pages/Landing.js';
 import Music from "./pages/Music";
 import Work from "./pages/Experience";
+import Mailer from './pages/components/Mailer'
 
 function App() {
 
@@ -20,6 +21,9 @@ function App() {
       </Route>
       <Route exact path="/music">
         <Music/>
+      </Route>
+      <Route exact path="/contact">
+        <Mailer/>
       </Route>
     </Router>
         

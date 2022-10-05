@@ -49,8 +49,6 @@ const Music = () => {
     const [ follow, setFollow ] = useState(null)
     const [ following, setFollowing ] = useState(null)
 
-
-
     // sets token
     useEffect(()=>{
         if(hash.substring(1) !== ''){
