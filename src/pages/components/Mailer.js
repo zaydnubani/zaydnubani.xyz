@@ -76,45 +76,45 @@ const Mailer = () => {
         }
     }, [duplicate, POC, recipient, recipientName])
 
-    // const StaCon = () =>{
-    //     return(
-    //         <div className="d-flex flex-column justify-content-center text-center">
-    //             <Toaster/>
-    //             <span className="fs-1 futura p-2" style={{color: 'white'}}>Submit your information and a brief message!</span>
-    //             <div className="d-flex flex-row">
-    //                 <input placeholder="First Name" className="border-0 futura rounded p-2 fs-5 m-1 w-50" style={{backgroundColor: 'white', color: '#006994'}}/>  
-    //                 <input placeholder="Last Name" className="border-0 futura rounded p-2 fs-5 m-1 w-50" style={{backgroundColor: 'white', color: '#006994'}}/>  
-    //             </div>
-    //             <input placeholder="Email Address" className="border-0 futura rounded p-2 fs-5 m-1" style={{backgroundColor: 'white', color: '#006994'}}/>  
-    //             <textarea placeholder='Brief Message' className="rounded futura p-2 fs-5 m-1" style={{backgroundColor: 'white', color: '#006994'}}/>  
-    //             <button className="btn futura text-uppercase fs-5 m-1" style={{backgroundColor: 'white'}} onClick={(e)=>{
+    const StaCon = () =>{
+        return(
+            <div className="d-flex flex-column justify-content-center text-center">
+                <Toaster/>
+                <span className="fs-1 futura p-2" style={{color: 'white'}}>Submit your information and a brief message!</span>
+                <div className="d-flex flex-row">
+                    <input placeholder="First Name" className="border-0 futura rounded p-2 fs-5 m-1 w-50" style={{backgroundColor: 'white', color: '#006994'}}/>  
+                    <input placeholder="Last Name" className="border-0 futura rounded p-2 fs-5 m-1 w-50" style={{backgroundColor: 'white', color: '#006994'}}/>  
+                </div>
+                <input placeholder="Email Address" className="border-0 futura rounded p-2 fs-5 m-1" style={{backgroundColor: 'white', color: '#006994'}}/>  
+                <textarea placeholder='Brief Message' className="rounded futura p-2 fs-5 m-1" style={{backgroundColor: 'white', color: '#006994'}}/>  
+                <button className="btn futura text-uppercase fs-5 m-1" style={{backgroundColor: 'white'}} onClick={(e)=>{
 
-    //                 e.preventDefault()
+                    e.preventDefault()
 
-    //                 const first = e.currentTarget.parentNode.children[2].children[0].value
-    //                 const last = e.currentTarget.parentNode.children[2].children[1].value
-    //                 const email = e.currentTarget.parentNode.children[3].value
-    //                 const message = e.currentTarget.parentNode.children[4].value
+                    const first = e.currentTarget.parentNode.children[2].children[0].value
+                    const last = e.currentTarget.parentNode.children[2].children[1].value
+                    const email = e.currentTarget.parentNode.children[3].value
+                    const message = e.currentTarget.parentNode.children[4].value
 
-    //                 if(first !== '' && last !== '' && email !== '' && message !== ''){
-    //                     setRecipient(email)
-    //                     setrecipientName(first)
-    //                     setPOC({
-    //                         first: first,
-    //                         last: last,
-    //                         email: email,
-    //                         message: message
-    //                     })   
-    //                 } else{
-    //                     toast.error('Please fill-out all fields.')
-    //                 }
+                    if(first !== '' && last !== '' && email !== '' && message !== ''){
+                        setRecipient(email)
+                        setrecipientName(first)
+                        setPOC({
+                            first: first,
+                            last: last,
+                            email: email,
+                            message: message
+                        })   
+                    } else{
+                        toast.error('Please fill-out all fields.')
+                    }
                     
-    //             }}>
-    //                 <span className="water">Submit</span>    
-    //             </button>
-    //         </div>
-    //     )
-    // }
+                }}>
+                    <span className="water">Submit</span>    
+                </button>
+            </div>
+        )
+    }
 
     const FinCon = () =>{
         return(

@@ -27,7 +27,7 @@ const scopes = [
 
 const CLIENT_ID = '677da9ba411c4561a74e4da23f97f0b9',
 CLIENT_SECRET = 'b89f6fdf5e6c4ac390d7139cf6882cac',
-REDIRECT_URI = 'http://localhost:3000/music' 
+REDIRECT_URI = 'https://zaydjnubani.com/music' 
 
 const url = `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&response_type=code&redirect_uri=${REDIRECT_URI}&scope=${scopes.join('%20')}&response_type=token&show_dialog=true`
 
