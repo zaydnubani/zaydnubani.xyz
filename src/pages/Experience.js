@@ -215,11 +215,11 @@ const Work = () => {
                         return(
                         <div className='rounded m-2 p-2' style={{backgroundColor: 'white'}} key={Experience.indexOf(res)}>
                             <button className="d-flex flex-column w-100 rounded" style={{backgroundColor: 'white', border: 'none'}} type="button" data-bs-toggle="collapse" data-bs-target={`#Collapse-${Experience.indexOf(res)}`} aria-expanded="false" aria-controls={`Collapse`}>
-                                <div className='d-flex flex-row align-items-center w-100'>
+                                <div className='d-flex flex-column align-items-start w-100'>
                                     <span className="futura water fs-3">
                                         {res.Company}
                                     </span>
-                                    <span className="futura water fs-5 ms-auto">
+                                    <span className="futura water fs-5">
                                     {res.Title}
                                     </span>
                                 </div>
