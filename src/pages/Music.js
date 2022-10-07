@@ -29,7 +29,7 @@ const Music = () => {
     [ refresh, setRefresh ] = useState(false)
 
     useEffect(() => {
-        axios.get('/auth/token').then(res=>{
+        axios.get('http://localhost:3000/auth/token').then(res=>{
             if(res.data !== ''){
                 setaccToken(res.data.access_token)
                 setrefToken(res.data.refresh_token)
@@ -42,7 +42,7 @@ const Music = () => {
         if(accToken !== null && refToken !== null && refresh !== false){
             axios({
                 method: 'POST',
-                url: '/auth/refresh',
+                url: 'http://localhost:3000/auth/refresh',
                 data:{
                     refresh_token: refToken,
                     access_token: accToken
