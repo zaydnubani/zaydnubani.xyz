@@ -35,7 +35,7 @@ global.refresh_token = ''
 const spotifyAPI = new SpotifyWebApi({
     clientId: process.env.REACT_APP_CLIENT_ID,
     clientSecret: process.env.REACT_APP_CLIENT_SECRET,
-    redirectUri: 'https://zaydjnubani/auth/callback'
+    redirectUri: 'http://localhost:3000/auth/callback'
 })
 
 const PORT = process.env.PORT || 5000;
