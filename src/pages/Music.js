@@ -2,36 +2,12 @@ import React, { useEffect, useState } from "react";
 import Player from "./components/WebPlayer";
 import SpotifyWebApi from "spotify-web-api-node";
 import toast, { Toaster } from 'react-hot-toast';
+import axios from 'axios'
+import dotenv from 'dotenv'
 
-const scopes = [
-    'ugc-image-upload',
-    'user-read-playback-state',
-    'user-modify-playback-state',
-    'user-read-currently-playing',
-    'streaming',
-    'app-remote-control',
-    'user-read-email',
-    'user-read-private',
-    'playlist-read-collaborative',
-    'playlist-modify-public',
-    'playlist-read-private',
-    'playlist-modify-private',
-    'user-library-modify',
-    'user-library-read',
-    'user-top-read',
-    'user-read-playback-position',
-    'user-read-recently-played',
-    'user-follow-read',
-    'user-follow-modify'
-];
-
-const CLIENT_ID = '677da9ba411c4561a74e4da23f97f0b9',
-CLIENT_SECRET = 'b89f6fdf5e6c4ac390d7139cf6882cac',
-REDIRECT_URI = 'https://zaydjnubani.com/music' 
-
-const url = `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&response_type=code&redirect_uri=${REDIRECT_URI}&scope=${scopes.join('%20')}&response_type=token&show_dialog=true`
-
-const hash = window.location.hash
+const CLIENT_ID = process.env.REACT_APP_CLIENT_ID,
+CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET,
+REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI 
 
 const spotifyApi = new SpotifyWebApi({
     clientId: CLIENT_ID,
@@ -41,27 +17,49 @@ const spotifyApi = new SpotifyWebApi({
 
 const Music = () => {
 
-    const [ authtoken, setAuthtoken ] = useState(null)
-    const [ user, setUser ] = useState(null)
-    const [ allPlaylists, setAllplaylists ] = useState([])
-    const [ tracks, setTracks ] = useState([])
-    const [ playlist, setPlaylist ] = useState(null)
-    const [ follow, setFollow ] = useState(null)
-    const [ following, setFollowing ] = useState(null)
+    const [ accToken, setaccToken ] = useState(null),
+    [ refToken, setrefToken ] = useState(null),
+    [ expTime, setexpTime ] = useState(null)
+    
+    const [ user, setUser ] = useState(null),
+    [ allPlaylists, setAllplaylists ] = useState([]),
+    [ tracks, setTracks ] = useState([]),
+    [ playlist, setPlaylist ] = useState(null),
+    [ follow, setFollow ] = useState(null),
+    [ following, setFollowing ] = useState(null),
+    [ refresh, setRefresh ] = useState(false)
 
-    // sets token
-    useEffect(()=>{
-        if(hash.split('#').length >= 2){
-            setAuthtoken(hash.split('=')[1].split('&')[0])
-            return
+    useEffect(() => {
+        axios.get('http://localhost:3000/auth/token').then(res=>{
+            if(res.data !== ''){
+                setaccToken(res.data.access_token)
+                setrefToken(res.data.refresh_token)
+                setexpTime(res.data.expires_in)
+            }
+        }).catch(err=>{console.log(err)})
+    }, []);
+
+    useEffect(() => {
+        if(accToken !== null && refToken !== null && refresh !== false){
+            axios({
+                method: 'POST',
+                url: 'http://localhost:3000/auth/refresh',
+                data:{
+                    refresh_token: refToken,
+                    access_token: accToken
+                }
+            }
+            ).then(res=>{
+                setaccToken(res.data)
+                setRefresh(false)
+            }).catch(err=>console.log(err)) 
         }
-        return
-    }, [setAuthtoken])
+    }, [accToken, refToken, refresh]);
 
     // gets user playlist
     useEffect(()=>{
-        if(authtoken !== null){
-            spotifyApi.setAccessToken(authtoken)
+        if(accToken !== null){
+            spotifyApi.setAccessToken(accToken)
             spotifyApi.getMe().then(data=>{
                 return setUser(data.body)
             }).catch(err=>{
@@ -70,12 +68,12 @@ const Music = () => {
             })
             return
         }
-    },[authtoken])
+    },[accToken])
 
     // grabs playlists
     useEffect(()=>{
-        if(authtoken !== null){
-            spotifyApi.setAccessToken(authtoken)
+        if(accToken !== null){
+            spotifyApi.setAccessToken(accToken)
             spotifyApi.getUserPlaylists('zayd-nubani').then(data=>{
                 return data.body.items.forEach(res=>{
                     if(res.name.toLowerCase() === 'eggplant parm'|res.name.toLowerCase() === 'texas bbq'|res.name.toLowerCase() === 'san peligrino'|res.name.toLowerCase() === 'when santana came to town'|res.name.toLowerCase() === 'kool aid'|res.name.toLowerCase() === 'suspect'){
@@ -85,11 +83,11 @@ const Music = () => {
             }).catch((err)=>{return console.log(err)})
             return
         }
-    }, [authtoken])
+    }, [accToken])
 
     useEffect(()=>{
-        if(authtoken !== null && user !== null && allPlaylists.length >= 1){
-            spotifyApi.setAccessToken(authtoken)
+        if(accToken !== null && user !== null && allPlaylists.length >= 1){
+            spotifyApi.setAccessToken(accToken)
             spotifyApi.getUserPlaylists(user.display_name).then(data=>{
                 return allPlaylists.forEach(res=>{
                     return data.body.items.forEach((ret)=>{
@@ -109,10 +107,11 @@ const Music = () => {
             })
             return
         }
-    },[user, authtoken, allPlaylists])
+    },[user, accToken, allPlaylists])
 
     useEffect(()=>{
-        if(authtoken !== null && playlist !== null){
+        if(accToken !== null && playlist !== null){
+            spotifyApi.setAccessToken(accToken)
             spotifyApi.getPlaylist(playlist)
             .then(data => {
                 return data.body.tracks.items.forEach((ret)=>{
@@ -124,10 +123,11 @@ const Music = () => {
             });
             return 
         }
-    },[authtoken, playlist])
+    },[accToken, playlist])
 
     useEffect(()=>{
-        if(authtoken !== null && follow !== null && following !== null){
+        if(accToken !== null && follow !== null && following !== null){
+            spotifyApi.setAccessToken(accToken)
             spotifyApi.followPlaylist(follow,
             {
                 'public' : false
@@ -139,7 +139,7 @@ const Music = () => {
             });
             return
         }
-    },[authtoken, follow, following])
+    },[accToken, follow, following])
 
     return(
         <div className="container p-2">
@@ -151,15 +151,15 @@ const Music = () => {
                             <span className="fs-1 futura water text-uppercase my-3" style={{color:'white'}}>{user.display_name}</span>
                             <div className="d-flex flex-column">
                                 <label className="futura fs-5" style={{color:'white'}}>Want to listen for longer?</label>
-                                <a className='btn p-3 align-self-center' href={url} style={{backgroundColor: 'white'}}>
+                                <button className='btn p-3 align-self-center' style={{backgroundColor: 'white'}} onClick={()=>{setRefresh(true)}}>
                                     <span className="fs-3 futura text-uppercase water">refresh token</span>
-                                </a>
+                                </button>
                             </div>
                         </div>
                     :
                         <div className="col-12 p-5 d-flex flex-column justify-content-evenly text-center" >
                             <span className="futura fs-1" style={{color:'white'}}>Want to hear what I'm listening to?</span>
-                            <a className='btn p-3 my-3 align-self-center' href={url} style={{backgroundColor: 'white'}}>
+                            <a className='btn p-3 my-3 align-self-center' href="/auth/login" style={{backgroundColor: 'white'}}>
                                 <span className="fs-3 futura text-uppercase" style={{color: '#006994'}}>Connect your Spotify!</span>
                             </a>
                         </div>
@@ -208,7 +208,7 @@ const Music = () => {
             <div className="position-fixed w-100 bottom-0 start-0">
             { 
                 tracks.length>=1?
-                <Player accessToken={authtoken} trackUri={tracks} />
+                <Player accessToken={accToken} trackUri={tracks} />
                 :
                 null
             }
