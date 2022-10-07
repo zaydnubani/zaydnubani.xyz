@@ -55,7 +55,7 @@ app.get('/auth/callback', (req, res) => {
         token_data = data.body
         refresh_token = data.body.refresh_token
         spotifyAPI.setRefreshToken(data.body.refresh_token)
-        request.post('localhost:3000/music', ()=>{
+        request.post('zaydjnubani.com/music', ()=>{
             res.redirect('/music')
         })
     }).catch(err=>res.send(err))
