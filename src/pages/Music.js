@@ -6,7 +6,7 @@ import axios from 'axios'
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID,
 CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET,
-REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI 
+REDIRECT_URI = 'https://zaydjnubani/auth/callback'
 
 const spotifyApi = new SpotifyWebApi({
     clientId: CLIENT_ID,
@@ -29,7 +29,7 @@ const Music = () => {
     [ refresh, setRefresh ] = useState(false)
 
     useEffect(() => {
-        axios.get('https://zaydjnubani.com/auth/token').then(res=>{
+        axios.get('/auth/token').then(res=>{
             if(res.data !== ''){
                 setaccToken(res.data.access_token)
                 setrefToken(res.data.refresh_token)
@@ -42,7 +42,7 @@ const Music = () => {
         if(accToken !== null && refToken !== null && refresh !== false){
             axios({
                 method: 'POST',
-                url: 'https://zaydjnubani.com/auth/refresh',
+                url: '/auth/refresh',
                 data:{
                     refresh_token: refToken,
                     access_token: accToken
