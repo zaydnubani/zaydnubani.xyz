@@ -54,7 +54,7 @@ const Music = () => {
                 setRefresh(false)
             }).catch(err=>console.log(err)) 
         }
-    }, [accToken, refToken, refresh]);
+    }, [accToken, refToken, refresh, expTime]);
 
     // gets user playlist
     useEffect(()=>{
