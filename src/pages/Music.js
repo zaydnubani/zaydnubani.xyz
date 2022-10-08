@@ -40,9 +40,10 @@ const Music = () => {
     useEffect(() => {
         axios.get('https://zaydjnubani.com/auth/token').then(res=>{
             if(res.data !== ''){
-                setaccToken(res.data.access_token)
-                setrefToken(res.data.refresh_token)
-                setexpTime(res.data.expires_in)
+                console.log(res)
+                // setaccToken(res.data.access_token)
+                // setrefToken(res.data.refresh_token)
+                // setexpTime(res.data.expires_in)
             }
         }).catch(err=>{console.log(err)})
     }, []);
