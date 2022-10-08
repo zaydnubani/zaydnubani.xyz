@@ -41,6 +41,9 @@ const Music = () => {
         axios.get('https://zaydjnubani.com/auth/token').then(res=>{
             if(res.data !== ''){
                 console.log(res)
+                setaccToken(null)
+                setrefToken(null)
+                setexpTime(null)
                 // setaccToken(res.data.access_token)
                 // setrefToken(res.data.refresh_token)
                 // setexpTime(res.data.expires_in)
