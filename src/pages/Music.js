@@ -26,7 +26,16 @@ const Music = () => {
     [ playlist, setPlaylist ] = useState(null),
     [ follow, setFollow ] = useState(null),
     [ following, setFollowing ] = useState(null),
-    [ refresh, setRefresh ] = useState(false)
+    [ refresh, setRefresh ] = useState(false),
+    [ loggedIn, setloggedIn ] = useState(false)
+
+    console.log(process.env.PORT)
+
+    useEffect(()=>{
+        if(loggedIn!==false){
+            axios.get('http://localhost:3000/auth/login').then(res=>console.log(res)).catch(err=>console.log(err))
+        }
+    }, [loggedIn])
 
     useEffect(() => {
         axios.get('http://localhost:3000/auth/token').then(res=>{
@@ -159,9 +168,12 @@ const Music = () => {
                     :
                         <div className="col-12 p-5 d-flex flex-column justify-content-evenly text-center" >
                             <span className="futura fs-1" style={{color:'white'}}>Want to hear what I'm listening to?</span>
-                            <a className='btn p-3 my-3 align-self-center' href="/auth/login" style={{backgroundColor: 'white'}}>
+                            {/* <a className='btn p-3 my-3 align-self-center' href="/auth/login" style={{backgroundColor: 'white'}}>
                                 <span className="fs-3 futura text-uppercase" style={{color: '#006994'}}>Connect your Spotify!</span>
-                            </a>
+                            </a> */}
+                            <button className='btn p-3 my-3 align-self-center' onClick={()=>{setloggedIn(true)}} style={{backgroundColor: 'white'}}>
+                                <span className="fs-3 futura text-uppercase" style={{color: '#006994'}}>Connect your Spotify!</span>
+                            </button>
                         </div>
                 }
                 {
