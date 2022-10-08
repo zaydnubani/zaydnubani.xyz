@@ -6,7 +6,7 @@ import axios from 'axios'
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID,
 CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET,
-REDIRECT_URI = 'http://localhost:3000/auth/callback'
+REDIRECT_URI = 'https://zaydjnubani.com/auth/callback'
 
 const spotifyApi = new SpotifyWebApi({
     clientId: CLIENT_ID,
@@ -33,12 +33,12 @@ const Music = () => {
 
     useEffect(()=>{
         if(loggedIn!==false){
-            axios.get('http://localhost:3000/auth/login').then(res=>console.log(res)).catch(err=>console.log(err))
+            axios.get('https://zaydjnubani.com/auth/login').then(res=>console.log(res)).catch(err=>console.log(err))
         }
     }, [loggedIn])
 
     useEffect(() => {
-        axios.get('http://localhost:3000/auth/token').then(res=>{
+        axios.get('https://zaydjnubani.com/auth/token').then(res=>{
             if(res.data !== ''){
                 setaccToken(res.data.access_token)
                 setrefToken(res.data.refresh_token)
@@ -51,7 +51,7 @@ const Music = () => {
         if(accToken !== null && refToken !== null && refresh !== false){
             axios({
                 method: 'POST',
-                url: 'http://localhost:3000/auth/refresh',
+                url: 'https://zaydjnubani.com/auth/refresh',
                 data:{
                     refresh_token: refToken,
                     access_token: accToken
