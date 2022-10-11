@@ -87,7 +87,7 @@ app.post('/auth/refresh', async (req, res)=>{
     }
 })
 
-app.use(express.static(path.join(__dirname, '../build')));
+app.use(express.static(path.join(__dirname, '../client/build', 'index.html')));
 
 app.listen(PORT, () => {
   console.log(`Listening at http://localhost:${PORT}`)
