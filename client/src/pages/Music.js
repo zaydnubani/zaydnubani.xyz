@@ -11,7 +11,7 @@ import axios from 'axios'
 
 const REACT_APP_CLIENT_ID = '677da9ba411c4561a74e4da23f97f0b9',
 REACT_APP_CLIENT_SECRET = '5b445d82817944d4ae29584439473994',
-REDIRECT_URI = 'http://localhost:3000/auth/callback'
+REDIRECT_URI = 'http://localhost:5000/auth/callback'
 
 const spotifyApi = new SpotifyWebApi({
     clientId: REACT_APP_CLIENT_ID,
@@ -40,21 +40,9 @@ const Music = () => {
     [ refresh, setRefresh ] = useState(false)
     // [ loggedIn, setloggedIn ] = useState(false)
 
-    console.log(process.env.PORT)
-
-    // useEffect(()=>{
-    //     if(loggedIn!==false){
-    //         axios.get('http://localhost:3000/auth/login').then(res=>console.log(res)).catch(err=>console.log(err))
-    //     }
-    // }, [loggedIn])
-
     useEffect(() => {
-        axios.get('http://localhost:3000/auth/token').then(res=>{
+        axios.get(`${window.location.origin}/auth/token`).then(res=>{
             if(res.data !== ''){
-                console.log(res)
-                // setaccToken(null)
-                // setrefToken(null)
-                // setexpTime(null)
                 setaccToken(res.data.access_token)
                 setrefToken(res.data.refresh_token)
                 setexpTime(res.data.expires_in)
@@ -66,7 +54,7 @@ const Music = () => {
         if(accToken !== null && refToken !== null && refresh !== false){
             axios({
                 method: 'POST',
-                url: 'http://localhost:3000/auth/refresh',
+                url: `${window.location.origin}/auth/refresh`,
                 data:{
                     refresh_token: refToken,
                     access_token: accToken

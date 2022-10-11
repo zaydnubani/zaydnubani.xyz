@@ -39,7 +39,7 @@ REACT_APP_CLIENT_SECRET = '5b445d82817944d4ae29584439473994'
 const spotifyAPI = new SpotifyWebApi({
     clientId: REACT_APP_CLIENT_ID,
     clientSecret: REACT_APP_CLIENT_SECRET,
-    redirectUri: 'http://localhost:3000/auth/callback'
+    redirectUri: 'http://localhost:5000/auth/callback'
 })
 
 // const spotifyAPI = new SpotifyWebApi({
@@ -55,6 +55,8 @@ var app = express();
 app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
+
+app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 app.get('/auth/login', (req, res) => {
     res.redirect(spotifyAPI.createAuthorizeURL(REACT_APP_SCOPES))
@@ -87,7 +89,9 @@ app.post('/auth/refresh', async (req, res)=>{
     }
 })
 
-app.use(express.static(path.resolve(__dirname, '../client/build', 'index.html')));
+app.get('*', (req, res)=>{
+    res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'))
+})
 
 app.listen(PORT, () => {
   console.log(`Listening at http://localhost:${PORT}`)
