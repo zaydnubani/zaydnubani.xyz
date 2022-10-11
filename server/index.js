@@ -32,11 +32,21 @@ global.token_data = ''
 
 global.refresh_token = ''
 
+const REACT_APP_CLIENT_ID = '677da9ba411c4561a74e4da23f97f0b9',
+REACT_APP_CLIENT_SECRET = '5b445d82817944d4ae29584439473994'
+
+
 const spotifyAPI = new SpotifyWebApi({
-    clientId: process.env.REACT_APP_CLIENT_ID,
-    clientSecret: process.env.REACT_APP_CLIENT_SECRET,
+    clientId: REACT_APP_CLIENT_ID,
+    clientSecret: REACT_APP_CLIENT_SECRET,
     redirectUri: 'http://localhost:3000/auth/callback'
 })
+
+// const spotifyAPI = new SpotifyWebApi({
+//     clientId: process.env.REACT_APP_CLIENT_ID,
+//     clientSecret: process.env.REACT_APP_CLIENT_SECRET,
+//     redirectUri: 'http://localhost:3000/auth/callback'
+// })
 
 const PORT = process.env.PORT || 5000;
 
