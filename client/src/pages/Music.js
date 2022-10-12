@@ -11,7 +11,7 @@ import axios from 'axios'
 
 const REACT_APP_CLIENT_ID = '677da9ba411c4561a74e4da23f97f0b9',
 REACT_APP_CLIENT_SECRET = '5b445d82817944d4ae29584439473994',
-REDIRECT_URI = 'http://localhost:5000/auth/callback'
+REDIRECT_URI = 'http://zaydnubani.xyz/auth/callback'
 
 const spotifyApi = new SpotifyWebApi({
     clientId: REACT_APP_CLIENT_ID,

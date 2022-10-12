@@ -39,7 +39,7 @@ REACT_APP_CLIENT_SECRET = '5b445d82817944d4ae29584439473994'
 const spotifyAPI = new SpotifyWebApi({
     clientId: REACT_APP_CLIENT_ID,
     clientSecret: REACT_APP_CLIENT_SECRET,
-    redirectUri: 'http://localhost:5000/auth/callback'
+    redirectUri: 'http://zaydnubani.xyz/auth/callback'
 })
 
 // const spotifyAPI = new SpotifyWebApi({
@@ -67,7 +67,7 @@ app.get('/auth/callback', (req, res) => {
         token_data = data.body
         refresh_token = data.body.refresh_token
         spotifyAPI.setRefreshToken(data.body.refresh_token)
-        request.post('zaydjnubani.com/music', ()=>{
+        request.post('zaydnubani.xyz/music', ()=>{
             res.redirect('/music')
         })
     }).catch(err=>res.send(err))
