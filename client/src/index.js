@@ -8,6 +8,7 @@ import Landing from './pages/Landing'
 import Music from './pages/Music'
 import Experience from './pages/Experience'
 import Mailer from './pages/components/Mailer'
+import Portfolio from "./pages/Portfolio";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: "/contact",
     element: <Mailer/>,
+  },
+  {
+    path: '/portfolio',
+    element: <Portfolio/>
   }
 ]);
 

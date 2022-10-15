@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import emailjs from '@emailjs/browser'
 import { toast, Toaster } from "react-hot-toast";
 import { client, q } from "../../config/index";
+import axios from 'axios'
 
 const Mailer = () => {
 
@@ -75,6 +76,18 @@ const Mailer = () => {
             return 
         }
     }, [duplicate, POC, recipient, recipientName])
+
+    useEffect(()=>{
+        axios({
+            mathod: 'POST',
+            url: `${window.location.origin}/api/contact`,
+            data: {
+                user_first_name: null,
+                user_last_name: null,
+                user_email: null
+            }
+        }).then((res)=>{console.log(res)}).catch((err)=>{console.log(err)})
+    })
 
     const StaCon = () =>{
         return(

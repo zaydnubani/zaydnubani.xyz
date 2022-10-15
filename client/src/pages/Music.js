@@ -9,13 +9,13 @@ import axios from 'axios'
 // CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET,
 // REDIRECT_URI = 'https://zaydjnubani.com/auth/callback'
 
-const REACT_APP_CLIENT_ID = '677da9ba411c4561a74e4da23f97f0b9',
-REACT_APP_CLIENT_SECRET = '5b445d82817944d4ae29584439473994',
-REDIRECT_URI = 'http://zaydnubani.xyz/auth/callback'
+const CLIENT_ID = '677da9ba411c4561a74e4da23f97f0b9',
+CLIENT_SECRET = '5b445d82817944d4ae29584439473994',
+REDIRECT_URI = 'http://zaydnubani.xyz/api/spotify/callback'
 
 const spotifyApi = new SpotifyWebApi({
-    clientId: REACT_APP_CLIENT_ID,
-    clientSecret: REACT_APP_CLIENT_SECRET,
+    clientId: CLIENT_ID,
+    clientSecret: CLIENT_SECRET,
     redirectUri: REDIRECT_URI
 });
 
@@ -54,7 +54,7 @@ const Music = () => {
         if(accToken !== null && refToken !== null && refresh !== false){
             axios({
                 method: 'POST',
-                url: `${window.location.origin}/auth/refresh`,
+                url: `${window.location.origin}/api/spotify/refresh`,
                 data:{
                     refresh_token: refToken,
                     access_token: accToken
@@ -171,7 +171,7 @@ const Music = () => {
                     :
                         <div className="col-12 p-5 d-flex flex-column justify-content-evenly text-center" >
                             <span className="futura fs-1" style={{color:'white'}}>Want to hear what I'm listening to?</span>
-                            <a className='btn p-3 my-3 align-self-center' href="/auth/login" style={{backgroundColor: 'white'}}>
+                            <a className='btn p-3 my-3 align-self-center' href="/api/spotify/login" style={{backgroundColor: 'white'}}>
                                 <span className="fs-3 futura text-uppercase" style={{color: '#006994'}}>Connect your Spotify!</span>
                             </a>
                             {/* <button className='btn p-3 my-3 align-self-center' onClick={()=>{setloggedIn(true)}} style={{backgroundColor: 'white'}}>

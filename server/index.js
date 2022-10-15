@@ -3,6 +3,7 @@ const request = require('request');
 const dotenv = require('dotenv');
 const SpotifyWebApi = require('spotify-web-api-node');
 const path = require('path/posix')
+const Email = require('./models/emails')
 
 const REACT_APP_SCOPES = [
     'ugc-image-upload',
@@ -32,23 +33,25 @@ global.token_data = ''
 
 global.refresh_token = ''
 
-const REACT_APP_CLIENT_ID = '677da9ba411c4561a74e4da23f97f0b9',
-REACT_APP_CLIENT_SECRET = '5b445d82817944d4ae29584439473994'
+// const REACT_APP_CLIENT_ID = '677da9ba411c4561a74e4da23f97f0b9',
+// REACT_APP_CLIENT_SECRET = '5b445d82817944d4ae29584439473994'
 
-
-const spotifyAPI = new SpotifyWebApi({
-    clientId: REACT_APP_CLIENT_ID,
-    clientSecret: REACT_APP_CLIENT_SECRET,
-    redirectUri: 'http://zaydnubani.xyz/auth/callback'
-})
 
 // const spotifyAPI = new SpotifyWebApi({
-//     clientId: process.env.REACT_APP_CLIENT_ID,
-//     clientSecret: process.env.REACT_APP_CLIENT_SECRET,
-//     redirectUri: 'http://localhost:3000/auth/callback'
+//     clientId: REACT_APP_CLIENT_ID,
+//     clientSecret: REACT_APP_CLIENT_SECRET,
+//     redirectUri: 'http://zaydnubani.xyz/auth/callback'
 // })
 
+const spotifyAPI = new SpotifyWebApi({
+    clientId: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    redirectUri: 'https://zaydnubani.xyz/api/spotify/callback'
+})
+
 const PORT = process.env.PORT || 5000;
+
+const sequelize = require('./configuration/connection');
 
 var app = express();
 
@@ -58,11 +61,11 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 
-app.get('/auth/login', (req, res) => {
+app.get('/api/spotify/login', (req, res) => {
     res.redirect(spotifyAPI.createAuthorizeURL(REACT_APP_SCOPES))
 })
 
-app.get('/auth/callback', (req, res) => {
+app.get('/api/spotify/callback', (req, res) => {
     spotifyAPI.authorizationCodeGrant(req.query.code).then((data)=>{
         token_data = data.body
         refresh_token = data.body.refresh_token
@@ -73,11 +76,11 @@ app.get('/auth/callback', (req, res) => {
     }).catch(err=>res.send(err))
 })
 
-app.get('/auth/token', (req, res) => {
+app.get('/api/spotify/token', (req, res) => {
   res.json(token_data)
 })
 
-app.post('/auth/refresh', async (req, res)=>{
+app.post('/api/spotify/refresh', async (req, res)=>{
    
     try {
         const refresh = req.body.refresh_token
@@ -89,10 +92,27 @@ app.post('/auth/refresh', async (req, res)=>{
     }
 })
 
+app.post('/api/contact', async (req, res) => {
+    try {
+        await Email.create({
+            user_first_name: req.body.user_first_name,
+            user_last_name: req.body.user_last_name,
+            user_email: req.body.user_email
+        })
+    } catch (err) {
+        res.status(400).json(err);
+    }
+})
+
+
 app.get('*', (req, res)=>{
     res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'))
 })
 
-app.listen(PORT, () => {
-  console.log(`Listening at http://localhost:${PORT}`)
-})
+// This creates ruum_db if it doesn't exist and connects with it
+sequelize.sync({ force: false }).then(() => 
+    {
+    // tells express to start listening on the server port
+    app.listen(PORT, () => console.log(`Now listening on http://localhost:${PORT}`));
+    }
+);

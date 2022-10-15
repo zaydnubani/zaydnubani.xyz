@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/zaydnubani/zaydnubani.xyz#readme",
   "dependencies": {
-    "concurrently": "^7.4.0"
+    "concurrently": "^7.4.0",
+    "openssl": "^2.0.0"
   }
 }
