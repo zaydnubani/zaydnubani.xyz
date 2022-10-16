@@ -3,7 +3,7 @@ const request = require('request');
 const dotenv = require('dotenv');
 const SpotifyWebApi = require('spotify-web-api-node');
 const path = require('path/posix')
-const Email = require('./models/emails')
+// const Email = require('./models/emails')
 
 const REACT_APP_SCOPES = [
     'ugc-image-upload',
@@ -82,17 +82,17 @@ app.post('/api/spotify/refresh', async (req, res)=>{
     }
 })
 
-app.post('/api/contact', async (req, res) => {
-    try {
-        await Email.create({
-            user_first_name: req.body.user_first_name,
-            user_last_name: req.body.user_last_name,
-            user_email: req.body.user_email
-        }).then(data=>res.json(data))
-    } catch (err) {
-        res.status(400).json(err);
-    }
-})
+// app.post('/api/contact', async (req, res) => {
+//     try {
+//         await Email.create({
+//             user_first_name: req.body.user_first_name,
+//             user_last_name: req.body.user_last_name,
+//             user_email: req.body.user_email
+//         }).then(data=>res.json(data))
+//     } catch (err) {
+//         res.status(400).json(err);
+//     }
+// })
 
 
 app.get('*', (req, res)=>{
