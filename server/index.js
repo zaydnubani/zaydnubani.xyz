@@ -98,7 +98,7 @@ app.post('/api/contact', async (req, res) => {
             user_first_name: req.body.user_first_name,
             user_last_name: req.body.user_last_name,
             user_email: req.body.user_email
-        })
+        }).then(data=>res.json(data))
     } catch (err) {
         res.status(400).json(err);
     }

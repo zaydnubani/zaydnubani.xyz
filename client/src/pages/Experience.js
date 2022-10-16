@@ -238,7 +238,6 @@ const Work = () => {
                                     {
                                         res.Details.map((ret)=>{
                                             const collapse = `${res.Employment}-${res.Tags[0]}-${res.Details.indexOf(ret)}`
-                                            console.log(collapse.toString())
                                             return(
                                                 <div className="accordion-item" key={res.Details.indexOf(ret)}>
                                                     <h2 className="accordion-header" id="flush-headingOne">
@@ -283,7 +282,7 @@ const Work = () => {
                                     {
                                         res.Tags.map((data)=>{
                                             return(
-                                                <div className="futura waterBG rounded rounded-pill m-2 px-2 py-1" style={{color: 'white'}}>
+                                                <div className="futura waterBG rounded rounded-pill m-2 px-2 py-1" style={{color: 'white'}} key={res.Tags.indexOf(data)}>
                                                     {data}
                                                 </div>
                                             )

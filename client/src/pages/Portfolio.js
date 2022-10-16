@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 
 import Sacrd_Gardn from '../img/Sacrd_Gardn.png'
 import ZJN from '../img/ZJN.png'
@@ -51,14 +51,14 @@ const Portfolio = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="headingOne">
-                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={`#${res.tags[0]}two`}  aria-expanded="false" aria-controls={`${res.tags[0]}two`} >
+                                    <div className="accordion-item">
+                                        <h2 className="accordion-header" id="headingOne">
+                                            <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={`#${res.tags[0]}two`}  aria-expanded="false" aria-controls={`${res.tags[0]}two`} >
                                                 <span className='text-uppercase futura' style={{color: '#006994'}}>Tags</span>
                                             </button>
                                         </h2>
-                                        <div id={`${res.tags[0]}two`} class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                            <div class="accordion-body d-flex flex-row flex-wrap">
+                                        <div id={`${res.tags[0]}two`} className="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                            <div className="accordion-body d-flex flex-row flex-wrap">
                                                 {
                                                     res.tags.map((ret)=>{
                                                         return(

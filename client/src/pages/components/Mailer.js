@@ -6,88 +6,45 @@ import axios from 'axios'
 
 const Mailer = () => {
 
-    const [ recipient, setRecipient ] = useState(null)
-    const [ recipientName, setrecipientName ] = useState(null)
-    const [ POC, setPOC ] = useState(null)
-    const [ duplicate, setDuplicate ] = useState(null)
-    const [ submitted, setSubmission ] = useState(false)
+    const [ recipientFN, setrecipientFN ] = useState(null),
+    [ recipientLN, setrecipientLN ] = useState(null),
+    [ submitted, setSubmission ] = useState(false),
+    [ recipientEmail, setrecipientEmail ] = useState(null)
 
     const SERVICE_ID = 'service_xoaol08',
     PUBLIC_KEY = '6Salh6qhnsU39yNzz',
-    // PRIVATE_KEY = 'JtDZOA1veRm2Hf_dG1xNk',
     EMAIL_TEMPLATE = 'template_6g6v88i'
-    
+
 
     useEffect(()=>{
-
-        if(recipientName !== null && recipient !== null){
-            client.query(q.Paginate(q.Match(q.Index('allInquiries')))).then((ret) => {
-                ret.data.forEach((ref) => { 
-                    client.query(q.Get(q.Ref(q.Collection('Inquiries'), ref.value.id))).then((oth) => {
-                        if(oth.data.email === recipient){
-                            setDuplicate(true) 
-                            return
-                        }else{
-                            setDuplicate(false)
-                            return
-                        }
-                    })
-                    return
+        const send = async (first, last, email) => {
+            try {
+                await axios({
+                    method: 'POST',
+                    url: `${window.location.origin}/api/contact`,
+                    data: {
+                        user_first_name: first,
+                        user_last_name: last,
+                        user_email: email
+                    }
                 })
-                return
-                }).catch((err) => console.error(
-                'Error: [%s] %s: %s',
-                err.name,
-                err.message
-            ))
-            return
-        }
+                
+                emailjs.send(SERVICE_ID, EMAIL_TEMPLATE, { to_name: first, to_email: email }, PUBLIC_KEY).then(res=>{
+                    setSubmission(true)
+                    toast.success('Check your email, you should have recieved something!')
+                }).catch(err=>toast.error('Unable to submit your contact information, try again')) 
 
-    }, [recipient, recipientName])
-
-    useEffect(()=>{
-
-        const TEMPLATE_PARAMS = {
-            to_name: recipientName,
-            to_email: recipient 
-        }
-
-        if(duplicate === false && POC !== null){
-            client.query(
-                q.Create(
-                  q.Collection('Inquiries'),
-                  {
-                    data: POC
-                  },
-                )
-            ).then(()=>{
-               emailjs.send(SERVICE_ID, EMAIL_TEMPLATE, TEMPLATE_PARAMS, PUBLIC_KEY).then(res=>{
-                setSubmission(true)
-                toast.success('Check your email, you should have recieved something!')}).catch(err=>toast.error('Unable to submit your contact information, try again'))  
-            })
-            .catch((err) => console.error(
-                'Error: [%s] %s: %s',
-                err.name,
-                err.message,
-                err.errors()[0].description,
-            ))
-        } else if(duplicate === true && POC !== null){
-            toast.error('This email has already been used')
-            return 
-        }
-    }, [duplicate, POC, recipient, recipientName])
-
-    useEffect(()=>{
-        axios({
-            mathod: 'POST',
-            url: `${window.location.origin}/api/contact`,
-            data: {
-                user_first_name: null,
-                user_last_name: null,
-                user_email: null
+            } catch (err){
+                console.log(err)
             }
-        }).then((res)=>{console.log(res)}).catch((err)=>{console.log(err)})
-    })
+        };
+
+        if(recipientFN !== null && recipientLN !== null && recipientEmail !== null){
+            send(recipientFN, recipientLN, recipientEmail)
+            return
+        };
+
+    }, [recipientFN, recipientLN, recipientEmail])
 
     const StaCon = () =>{
         return(
@@ -102,7 +59,7 @@ const Mailer = () => {
                 <textarea placeholder='Brief Message' className="rounded futura p-2 fs-5 m-1" style={{backgroundColor: 'white', color: '#006994'}}/>  
                 <button className="btn futura text-uppercase fs-5 m-1" style={{backgroundColor: 'white'}} onClick={(e)=>{
 
-                    e.preventDefault()
+                    // e.preventDefault()
 
                     const first = e.currentTarget.parentNode.children[2].children[0].value
                     const last = e.currentTarget.parentNode.children[2].children[1].value
@@ -110,18 +67,12 @@ const Mailer = () => {
                     const message = e.currentTarget.parentNode.children[4].value
 
                     if(first !== '' && last !== '' && email !== '' && message !== ''){
-                        setRecipient(email)
-                        setrecipientName(first)
-                        setPOC({
-                            first: first,
-                            last: last,
-                            email: email,
-                            message: message
-                        })   
+                       setrecipientFN(first)
+                       setrecipientLN(last)
+                       setrecipientEmail(email)
                     } else{
                         toast.error('Please fill-out all fields.')
                     }
-                    
                 }}>
                     <span className="water">Submit</span>    
                 </button>
