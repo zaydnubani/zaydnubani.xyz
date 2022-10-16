@@ -12,8 +12,8 @@ require('dotenv').config();
 let sequelize;
 
 // need to follow-up on purpose, watch class recordings
-if (process.env.JAWSDB_URL){
-  sequelize = new Sequelize(process.env.JAWSDB_URL);
+if ('mysql://wvpge2scvgdncf8z:hfjnoy62z34rnvji@au77784bkjx6ipju.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/r8glv0l2drn6wx0o'){
+  sequelize = new Sequelize('mysql://wvpge2scvgdncf8z:hfjnoy62z34rnvji@au77784bkjx6ipju.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/r8glv0l2drn6wx0o');
 } else {
 // initializes new connection to ruum_db
   sequelize = new Sequelize(
