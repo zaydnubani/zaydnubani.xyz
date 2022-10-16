@@ -59,7 +59,7 @@ app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static(path.resolve(__dirname, '../client/build')));
+app.use(express.static(path.resolve(__dirname, '../../client/build')));
 
 app.get('/api/spotify/login', (req, res) => {
     res.redirect(spotifyAPI.createAuthorizeURL(REACT_APP_SCOPES))
