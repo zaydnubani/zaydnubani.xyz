@@ -21,6 +21,9 @@ if (process.env.JAWSDB_URL){
     process.env.DB_NAME,
     process.env.DB_USER,
     process.env.DB_PASSWORD,
+    // 'zaydnubanixyz_db',
+    // 'root',
+    // 'BigWang69*',
     {
       host: 'localhost',
       dialect: 'mysql',
