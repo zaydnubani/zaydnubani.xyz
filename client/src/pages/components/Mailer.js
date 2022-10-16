@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import emailjs from '@emailjs/browser'
 import { toast, Toaster } from "react-hot-toast";
-import { client, q } from "../../config/index";
 import axios from 'axios'
 
 const Mailer = () => {
