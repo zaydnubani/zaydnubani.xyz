@@ -49,7 +49,7 @@ app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static(path.resolve(__dirname, '../../client/build')));
+app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 app.get('/api/spotify/login', (req, res) => {
     res.redirect(spotifyAPI.createAuthorizeURL(REACT_APP_SCOPES))
@@ -96,7 +96,7 @@ app.post('/api/spotify/refresh', async (req, res)=>{
 
 
 app.get('*', (req, res)=>{
-    res.sendFile(path.resolve(__dirname, '../../client/build', 'index.html'))
+    res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'))
 })
 
 // This creates ruum_db if it doesn't exist and connects with it
