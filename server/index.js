@@ -34,8 +34,8 @@ global.token_data = '';
 global.refresh_token = '';
 
 const spotifyAPI = new SpotifyWebApi({
-    clientId: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET,
+    clientId: '677da9ba411c4561a74e4da23f97f0b9',
+    clientSecret: '5b445d82817944d4ae29584439473994',
     redirectUri: 'https://zaydnubani.xyz/api/spotify/callback'
 })
 

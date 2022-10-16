@@ -18,12 +18,12 @@ if (process.env.JAWSDB_URL){
 // initializes new connection to ruum_db
   sequelize = new Sequelize(
     // credentials
-    process.env.DB_NAME,
-    process.env.DB_USER,
-    process.env.DB_PASSWORD,
-    // 'zaydnubanixyz_db',
-    // 'root',
-    // 'BigWang69*',
+    // process.env.DB_NAME,
+    // process.env.DB_USER,
+    // process.env.DB_PASSWORD,
+    'zaydnubanixyz_db',
+    'root',
+    'BigWang69*',
     {
       host: 'localhost',
       dialect: 'mysql',
