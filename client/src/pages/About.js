@@ -32,7 +32,7 @@ const About = () => {
     ]
 
     return (
-        <div className='d-flex flex-row flex-wrap'>
+        <div className='d-flex flex-row flex-wrap justify-content-evenly'>
             <div className='card m-2' style={{width: '18rem'}}>
                 <div className='card-body d-flex flex-column align-items-center justify-content-evenly'>
                     <span className='card-title futura fs-1' style={{color: '#006994'}}>Hello there.</span>
