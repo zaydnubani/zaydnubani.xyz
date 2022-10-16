@@ -27,21 +27,11 @@ const REACT_APP_SCOPES = [
     'user-follow-modify'
 ]
 
-dotenv.config()
+dotenv.config();
 
-global.token_data = ''
+global.token_data = '';
 
-global.refresh_token = ''
-
-// const REACT_APP_CLIENT_ID = '677da9ba411c4561a74e4da23f97f0b9',
-// REACT_APP_CLIENT_SECRET = '5b445d82817944d4ae29584439473994'
-
-
-// const spotifyAPI = new SpotifyWebApi({
-//     clientId: REACT_APP_CLIENT_ID,
-//     clientSecret: REACT_APP_CLIENT_SECRET,
-//     redirectUri: 'http://zaydnubani.xyz/auth/callback'
-// })
+global.refresh_token = '';
 
 const spotifyAPI = new SpotifyWebApi({
     clientId: process.env.CLIENT_ID,
