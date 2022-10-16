@@ -41,7 +41,7 @@ const spotifyAPI = new SpotifyWebApi({
 
 const PORT = process.env.PORT || 5000;
 
-const sequelize = require('./configuration/connection');
+// const sequelize = require('./configuration/connection');
 
 var app = express();
 
@@ -100,9 +100,9 @@ app.get('*', (req, res)=>{
 })
 
 // This creates ruum_db if it doesn't exist and connects with it
-sequelize.sync({ force: false }).then(() => 
-    {
+// sequelize.sync({ force: false }).then(() => 
+//     {
     // tells express to start listening on the server port
     app.listen(PORT, () => console.log(`Now listening on http://localhost:${PORT}`));
-    }
-);
+//     }
+// );
