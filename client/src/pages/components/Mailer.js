@@ -90,10 +90,10 @@ const Mailer = () => {
     return(
         <div>
         {
-            // submitted !== false ?
+            submitted !== false ?
             <FinCon/>
-            // :
-            // <StaCon/>
+            :
+            <StaCon/>
         }
         </div>
     )
