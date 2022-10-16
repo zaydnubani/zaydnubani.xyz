@@ -30,7 +30,6 @@ const Mailer = () => {
                 
                 emailjs.send(SERVICE_ID, EMAIL_TEMPLATE, { to_name: first, to_email: email }, PUBLIC_KEY).then(res=>{
                     setSubmission(true)
-                    toast.success('Check your email, you should have recieved something!')
                 }).catch(err=>toast.error('Unable to submit your contact information, try again')) 
 
             } catch (err){
@@ -81,9 +80,9 @@ const Mailer = () => {
 
     const FinCon = () =>{
         return(
-            <div className="d-flex flex-column justify-content-center text-center">
-                <span className="fs-1 futura p-2" style={{color: 'white'}}>Please check your email, there should be a message waiting for you!</span>
-                <a href="/" className="btn p-2 fs-3 text-uppercase" style={{backgroundColor: 'white'}}><span className="water">home</span></a>
+            <div className="d-flex flex-column justify-content-center text-center p-5">
+                <span className="fs-1 futura p-2 my-5" style={{color: 'white'}}>Please check your email, there should be a message waiting for you!</span>
+                <a href="/" className="btn p-2 fs-3 text-uppercase futura" style={{backgroundColor: 'white'}}><span className="water">home</span></a>
             </div>
         )
     }
@@ -91,10 +90,10 @@ const Mailer = () => {
     return(
         <div>
         {
-            submitted !== false ?
+            // submitted !== false ?
             <FinCon/>
-            :
-            <StaCon/>
+            // :
+            // <StaCon/>
         }
         </div>
     )
