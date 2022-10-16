@@ -26,8 +26,9 @@ const Music = () => {
     // [ loggedIn, setloggedIn ] = useState(false)
 
     useEffect(() => {
-        axios.get(`${window.location.origin}/auth/token`).then(res=>{
+        axios.get(`${window.location.origin}/api/spotify/token`).then(res=>{
             if(res.data !== ''){
+                console.log(res.data)
                 setaccToken(res.data.access_token)
                 setrefToken(res.data.refresh_token)
                 setexpTime(res.data.expires_in)
