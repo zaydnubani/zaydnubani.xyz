@@ -34,6 +34,11 @@ Email.init(
                 isEmail: true,
             },
         },
+        user_message: {
+            type: DataTypes.STRING,
+            allowNull: true,
+            unique: false
+        },
     },
     {
         hooks: {

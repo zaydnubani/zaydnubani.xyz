@@ -23,3 +23,23 @@ body{
   transform: scale(0.9);
   transition: all 0.5s;
 }
+
+.change{
+  transition: all 1s ease;
+}
+
+textarea{
+  resize: none;
+}
+
+textarea:focus{
+  outline: none;
+}
+
+textarea::-webkit-scrollbar {
+  visibility: hidden;
+}
+
+input:focus{
+  outline: none;
+}

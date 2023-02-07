@@ -28,18 +28,29 @@ const Body = () => {
         }
     ]
 
+    setTimeout(()=>{
+        document.getElementById("intro").style.opacity = 0
+    }, 3000)
+
     const wordChange = () =>{
 
         let i = 1
 
         setInterval(()=>{
 
-            const words = ["Hello.", "I'm Zayd.", "A developer."];
+            const words = ["Hello.", "I'm Zayd."];
         
             document.getElementById("intro").innerHTML = words[i]
             i = (i+1) % words.length;
 
-        }, 4000)
+            document.getElementById("intro").style.opacity = 1
+
+
+            setTimeout(()=>{
+                document.getElementById("intro").style.opacity = 0
+            }, 3000)
+
+        }, 5000)
     }
 
     wordChange();

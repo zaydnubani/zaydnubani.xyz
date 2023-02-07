@@ -1,2 +1,2 @@
-DROP DATABASE IF EXISTS zaydnubanixyz_db;
-CREATE DATABASE zaydnubanixyz_db;
+DROP DATABASE IF EXISTS zaydnubani_xyz;
+CREATE DATABASE zaydnubani_xyz;

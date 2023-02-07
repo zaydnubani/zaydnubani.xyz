@@ -28,7 +28,7 @@ const Mailer = () => {
                     }
                 })
                 
-                emailjs.send(SERVICE_ID, EMAIL_TEMPLATE, { to_name: first, to_email: email }, PUBLIC_KEY).then(res=>{
+                emailjs.send(process.env.SERVICE_ID, process.EMAIL_TEMPLATE, { to_: first, to_email: email }, PUBLIC_KEY).then(res=>{
                     setSubmission(true)
                 }).catch(err=>toast.error('Unable to submit your contact information, try again')) 
 
@@ -48,7 +48,6 @@ const Mailer = () => {
         return(
             <div className="d-flex flex-column justify-content-center text-center">
                 <Toaster/>
-                <span className="fs-1 futura p-2" style={{color: 'white'}}>Submit your information and a brief message!</span>
                 <div className="d-flex flex-row">
                     <input placeholder="First Name" className="border-0 futura rounded p-2 fs-5 m-1 w-50" style={{backgroundColor: 'white', color: '#006994'}}/>  
                     <input placeholder="Last Name" className="border-0 futura rounded p-2 fs-5 m-1 w-50" style={{backgroundColor: 'white', color: '#006994'}}/>  

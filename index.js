@@ -1,11 +1,11 @@
-const express = require('express')
-const request = require('request');
-const dotenv = require('dotenv');
-const SpotifyWebApi = require('spotify-web-api-node');
-const path = require('path/posix')
-const Email = require('./models/emails')
+const express = require('express'),
+request = require('request'),
+dotenv = require('dotenv'),
+SpotifyWebApi = require('spotify-web-api-node'),
+path = require('path/posix'),
+Email = require('./models/emails'),
 
-const REACT_APP_SCOPES = [
+REACT_APP_SCOPES = [
     'ugc-image-upload',
     'user-read-playback-state',
     'user-modify-playback-state',
@@ -25,23 +25,22 @@ const REACT_APP_SCOPES = [
     'user-read-recently-played',
     'user-follow-read',
     'user-follow-modify'
-]
+],
 
+spotifyAPI = new SpotifyWebApi({
+    clientId: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    redirectUri: 'https://zaydnubani.xyz/api/spotify/callback'
+}),
+
+PORT = process.env.PORT || 5000,
+
+sequelize = require('./configuration/connection');
 dotenv.config();
 
 global.token_data = '';
 
 global.refresh_token = '';
-
-const spotifyAPI = new SpotifyWebApi({
-    clientId: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET,
-    redirectUri: 'https://zaydnubani.xyz/api/spotify/callback'
-})
-
-const PORT = process.env.PORT || 5000;
-
-const sequelize = require('./configuration/connection');
 
 var app = express();
 
@@ -85,15 +84,17 @@ app.post('/api/spotify/refresh', async (req, res)=>{
 app.post('/api/contact', async (req, res) => {
     try {
         await Email.create({
-            user_first_name: req.body.user_first_name,
-            user_last_name: req.body.user_last_name,
-            user_email: req.body.user_email
-        }).then(data=>res.json(data))
+            user_first_name: req.body.first_name,
+            user_last_name: req.body.last_name,
+            user_email: req.body.email,
+            user_message: req.body.message
+        }).then((data)=>{
+            res.json(data)
+        })
     } catch (err) {
         res.status(400).json(err);
     }
 })
-
 
 app.get('*', (req, res)=>{
     res.sendFile(path.resolve(__dirname, './client/build', 'index.html'))
