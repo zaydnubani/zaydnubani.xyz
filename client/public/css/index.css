@@ -1,3 +1,7 @@
+body{
+  background-color: #EEF4D4;
+}
+
 .futura {
   font-family: futura-pt, sans-serif;
   font-weight: 700;
@@ -10,45 +14,12 @@
   font-style: normal;
 }
 
-.water {
-  -webkit-background-clip: text;
-  background-clip: text;
-  background-image: url('/img/water.webp');
-  color: transparent;
+.hover:not(:hover){
+  transform: scale(1);
+  transition: all 0.5s;
 }
 
-::placeholder{
-  -webkit-background-clip: text;
-  background-clip: text;
-  background-image: url('/img/water.webp');
-  color: transparent;
-}
-
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
-  -webkit-background-clip: text;
-  background-clip: text;
-  background-image: url('/img/water.webp');
-  color: transparent;
-}
-
-::-ms-input-placeholder { /* Microsoft Edge */
-  -webkit-background-clip: text;
-  background-clip: text;
-  background-image: url('/img/water.webp');
-  color: transparent;
-}
-
-.water-underline:hover {
-  color: #006994;
-  text-decoration-line: underline;
-}
-
-.waterBG {
-  background-image: url('/img/water.webp');
-}
-
-input:focus, textarea:focus {
-  outline: none !important;
-  border:1px solid white;
-  box-shadow: 0 0 10px rgb(185, 224, 246);
+.hover:hover {
+  transform: scale(0.9);
+  transition: all 0.5s;
 }
