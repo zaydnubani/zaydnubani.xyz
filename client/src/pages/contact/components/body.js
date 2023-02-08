@@ -109,7 +109,7 @@ const Body = () => {
                        setrecipientLN(last)
                        setrecipientEmail(email)
                        setrecipientMessage(message)
-                       e.currentTarget.onclick = null
+                    //    e.currentTarget.onclick = null
                     } else{
                         toast.error('Please fill-out all required fields.')
                     }
