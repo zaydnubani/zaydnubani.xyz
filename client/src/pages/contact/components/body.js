@@ -34,15 +34,15 @@ const Body = () => {
         send = async (first, last, message, email) => {
             try {
                 await emailjs.send(
-                    'service_xoaol08',
-                    'template_wsthaia',
+                    process.env.SERVICE_ID,
+                    process.env.TEMPLATE_ID,
                     {
                         first_name: first,
                         last_name: last,
                         message: message,
                         email: email
                     },
-                    '6Salh6qhnsU39yNzz'
+                    process.env.PUBLIC_KEY
                 ).then((data)=>{
                     console.log(data)
                 })
