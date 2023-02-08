@@ -88,8 +88,19 @@ app.post('/api/contact', async (req, res) => {
             user_last_name: req.body.last_name,
             user_email: req.body.email,
             user_message: req.body.message
-        }).then((data)=>{
-            res.json(data)
+        }).then(()=>{
+            const mail = {
+                data: {
+                    first_name: req.body.first_name,
+                    last_name: req.body.last_name,
+                    email: req.body.email,
+                    message: req.body.message
+                },
+                service: process.env.SERVICE_ID,
+                template: process.env.TEMPLATE_ID,
+                public: process.env.PUBLIC_KEY
+            }
+            res.json(mail)
         })
     } catch (err) {
         res.status(400).json(err);

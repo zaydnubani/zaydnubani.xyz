@@ -24,7 +24,7 @@ body{
   transition: all 0.5s;
 }
 
-.change{
+.change, .hover{
   transition: all 1s ease;
 }
 
@@ -42,4 +42,12 @@ textarea::-webkit-scrollbar {
 
 input:focus{
   outline: none;
+}
+
+#state, #timer{
+  transition: all 1s ease-in-out;
+}
+
+.menu {
+  transition: all 2s ease-in-out;
 }
